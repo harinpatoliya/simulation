@@ -1,0 +1,384 @@
+
+ + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + +
+ + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + +
+ + +                                                                         + +
+ + +                      ASPEN PLUS CALCULATION HISTORY                     + +
+ + +                                                                         + +
+ + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + +
+ + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + +
+
+ ASPEN PLUS IS A TRADEMARK OF           HOTLINE:
+ ASPEN TECHNOLOGY, INC.                 U.S.A. 888/996-7100
+ 781/221-6400                           EUROPE (44) 1189-226555
+
+ PLATFORM: WIN-X64                                       JULY 4, 2025        
+ VERSION: 38.0   Build 380                               FRIDAY      
+ INSTALLATION:                                           11:38:40 P.M.       
+
+ THIS COPY OF ASPEN PLUS LICENSED TO HAMBURG UNIVERSITY OF TE        
+
+
+      ASPEN PLUS (R) IS A PROPRIETARY PRODUCT OF ASPEN TECHNOLOGY, INC.
+      (ASPENTECH), AND MAY BE USED ONLY UNDER AGREEMENT WITH ASPENTECH.
+      RESTRICTED RIGHTS LEGEND:  USE, REPRODUCTION, OR DISCLOSURE BY THE
+      U.S. GOVERNMENT IS SUBJECT TO RESTRICTIONS SET FORTH IN 
+      (i) FAR 52.227-14, Alt. III, (ii) FAR 52.227-19, (iii) DFARS 
+      252.227-7013(c)(1)(ii), or (iv) THE ACCOMPANYING LICENSE AGREEMENT,
+      AS APPLICABLE. FOR PURPOSES OF THE FAR, THIS SOFTWARE SHALL BE DEEMED
+      TO BE "UNPUBLISHED" AND LICENSED WITH DISCLOSURE PROHIBITIONS.
+      CONTRACTOR/SUBCONTRACTOR: ASPEN TECHNOLOGY, INC. 20 CROSBY DRIVE,
+      BEDFORD, MA 01730.
+ *** INPUT SUMMARY ***
+
+ >>CURRENT RUN
+
+   ORIGINAL RUN                           JULY 4, 2025        
+   11:38:40 P.M.                          FRIDAY      
+   INPUT FILE: _4913gbg.inm
+   RUN ID : _4913gbg
+          1    ;
+          2    ;Input file created by Aspen Plus Rel. 38.0 at 23:38:39 Fri Jul 4, 2025
+          3    ;Directory D:\Simulation\Acetic anhydryd production  Runid simulation 1
+          4    ;
+          5
+          6
+          7    DYNAMICS
+          8        DYNAMICS RESULTS=ON
+          9
+         10    TITLE 'Production of Acetic anhydride'
+         11
+         12    IN-UNITS MET VOLUME-FLOW='l/hr' ENTHALPY-FLO='kcal/hr'  &
+         13            HEAT-TRANS-C='kcal/hr-sqm-K' TEMPERATURE=C DELTA-T=C  &
+         14            HEAD=meter HEAT=kcal MOLE-CONC='mol/l' SHORT-LENGTH=mm
+         15
+         16    DEF-STREAMS CONVEN ALL
+         17
+         18    MODEL-OPTION
+         19
+         20    DESCRIPTION '
+         21        Specialty Chemicals Simulation with Metric Units :
+         22        C, atm, kg/hr, kmol/hr, kcal/hr, l/hr.
+         23
+         24        Property Method: NRTL
+         25
+         26        Flow basis for input: Mass
+         27
+         28        Stream report composition: Mass flow
+         29        '
+         30
+         31    DATABANKS 'APV120 PURE38' / 'APV120 AQUEOUS' / 'APV120 SOLIDS' &
+         32             / 'APV120 INORGANIC' / 'APESV120 AP-EOS' /  &
+         33            'NISTV120 NIST-TRC' / NOASPENPCD
+         34
+         35    PROP-SOURCES 'APV120 PURE38' / 'APV120 AQUEOUS' /  &
+         36            'APV120 SOLIDS' / 'APV120 INORGANIC' / 'APESV120 AP-EOS' &
+         37             / 'NISTV120 NIST-TRC'
+         38
+         39    COMPONENTS
+         40        ACETONE C3H6O-1 /
+         41        KETENE C2H2O /
+         42        METHANE CH4 /
+         43        A-ACID C2H4O2-1 /
+         44        A-ANHYDR C4H6O3
+         45
+         46    SOLVE
+         47        RUN-MODE MODE=SIM
+         48
+         49    FLOWSHEET
+         50        BLOCK PFR IN=FEED OUT=PFR-PRD
+         51        BLOCK COMP IN=PFR-PRD OUT=FD2ABSRB
+         52        BLOCK ABSORBER IN=FD2ABSRB OUT=CH4-VAP ABR-TOP ABR-BTM
+         53        BLOCK DSTL IN=ABR-TOP OUT=DSTL-TOP DSTL-BTM
+         54        BLOCK RCSTR IN=DSTL-BTM ACETACID OUT=CSTR-PRD
+         55
+         56    PROPERTIES WILS-NTH
+         57        PROPERTIES NRTL
+         58
+         59    USER-PROPS DRUSR2 1 2 3
+         60
+         61    ESTIMATE ALL
+         62        WILSON ALL ALL UNIFAC
+         63
+         64    PROP-DATA NRTL-1
+         65        IN-UNITS MET VOLUME-FLOW='l/hr' ENTHALPY-FLO='kcal/hr'  &
+         66            HEAT-TRANS-C='kcal/hr-sqm-K' TEMPERATURE=C DELTA-T=C  &
+         67            HEAD=meter HEAT=kcal MOLE-CONC='mol/l' SHORT-LENGTH=mm
+         68        PROP-LIST NRTL
+         69        BPVAL ACETONE A-ANHYDR 0.0 -336.1269000 .3000000000 0.0  &
+         70            0.0 0.0 25.00000000 139.5000000
+         71        BPVAL A-ANHYDR ACETONE 0.0 533.7424000 .3000000000 0.0 0.0  &
+         72            0.0 25.00000000 139.5000000
+         73
+         74    PROP-DATA WILSON-1
+         75        IN-UNITS MET VOLUME-FLOW='l/hr' ENTHALPY-FLO='kcal/hr'  &
+         76            HEAT-TRANS-C='kcal/hr-sqm-K' TEMPERATURE=C DELTA-T=C  &
+         77            HEAD=meter HEAT=kcal MOLE-CONC='mol/l' SHORT-LENGTH=mm
+         78        PROP-LIST WILSON
+         79        BPVAL ACETONE METHANE 0.0 -701.7533310 0.0 0.0 25.00000000  &
+         80            25.00000000 0.0
+         81        BPVAL METHANE ACETONE 0.0 176.7062300 0.0 0.0 25.00000000  &
+         82            25.00000000 0.0
+         83        BPVAL ACETONE A-ACID 0.0 364.7397500 0.0 0.0 25.00000000  &
+         84            25.00000000 0.0
+         85        BPVAL A-ACID ACETONE 0.0 -793.4076430 0.0 0.0 25.00000000  &
+         86            25.00000000 0.0
+         87        BPVAL ACETONE A-ANHYDR 0.0 39.19844830 0.0 0.0 25.00000000  &
+         88            25.00000000 0.0
+         89        BPVAL A-ANHYDR ACETONE 0.0 -104.3382250 0.0 0.0  &
+         90            25.00000000 25.00000000 0.0
+         91        BPVAL METHANE A-ACID 0.0 86.36743470 0.0 0.0 25.00000000  &
+         92            25.00000000 0.0
+         93        BPVAL A-ACID METHANE 0.0 -782.4089360 0.0 0.0 25.00000000  &
+         94            25.00000000 0.0
+         95        BPVAL METHANE A-ANHYDR 0.0 115.3248410 0.0 0.0 25.00000000  &
+         96            25.00000000 0.0
+         97        BPVAL A-ANHYDR METHANE 0.0 -1166.029060 0.0 0.0  &
+         98            25.00000000 25.00000000 0.0
+         99        BPVAL A-ACID A-ANHYDR 0.0 -1075.919410 0.0 0.0 25.00000000  &
+        100            25.00000000 0.0
+        101        BPVAL A-ANHYDR A-ACID 0.0 446.7987300 0.0 0.0 25.00000000  &
+        102            25.00000000 0.0
+        103
+        104    STREAM ACETACID
+        105        SUBSTREAM MIXED TEMP=25. PRES=1. <bar> MOLE-FLOW=27.44
+        106        MOLE-FRAC A-ACID 1.
+        107
+        108    STREAM FEED
+        109        SUBSTREAM MIXED TEMP=1035. <K> PRES=1.6 MASS-FLOW=7850.
+        110        MASS-FRAC ACETONE 1.
+        111
+        112    BLOCK ABSORBER RADFRAC
+        113        PARAM NSTAGE=18 ALGORITHM=STANDARD MAXOL=25 DAMPING=NONE
+        114        COL-CONFIG CONDENSER=PARTIAL-V-L REBOILER=NONE
+        115        FEEDS FD2ABSRB 18 ON-STAGE-VAP
+        116        PRODUCTS CH4-VAP 1 V / ABR-TOP 1 L / ABR-BTM 18 L
+        117        P-SPEC 1 1.8 <bar>
+        118        COL-SPECS MASS-B=6300. T1=-130.
+        119
+        120    BLOCK DSTL RADFRAC
+        121        PARAM NSTAGE=12 ALGORITHM=STANDARD MAXOL=25 DAMPING=NONE
+        122        COL-CONFIG CONDENSER=TOTAL
+        123        FEEDS ABR-TOP 6
+        124        PRODUCTS DSTL-TOP 1 L / DSTL-BTM 12 L
+        125        P-SPEC 1 1.8 <bar>
+        126        COL-SPECS MASS-D=150. MOLE-RR=3.
+        127
+        128    BLOCK RCSTR RCSTR
+        129        PARAM VOL=20. <cum> TEMP=50. PRES=0.1 <bar>
+        130        REACTIONS RXN-IDS=R-2
+        131
+        132    BLOCK PFR RPLUG
+        133        PARAM TYPE=ADIABATIC LENGTH=2.37555198 DIAM=1.
+        134        REACTIONS RXN-IDS=R-1
+        135
+        136    BLOCK COMP COMPR
+        137        PARAM TYPE=ASME-POLYTROP PRES=3. <bar> SB-MAXIT=30  &
+        138            SB-TOL=0.0001
+        139
+        140    DESIGN-SPEC DS-1
+        141        DEFINE INLET MOLE-FLOW STREAM=FEED SUBSTREAM=MIXED  &
+        142            COMPONENT=ACETONE UOM="kmol/hr"
+        143        DEFINE OUTLET MOLE-FLOW STREAM=PFR-PRD SUBSTREAM=MIXED  &
+        144            COMPONENT=ACETONE UOM="kmol/hr"
+        145        SPEC "(INLET-OUTLET)*100/INLET" TO "20"
+        146        TOL-SPEC "0.01"
+        147        VARY BLOCK-VAR BLOCK=PFR VARIABLE=LENGTH SENTENCE=PARAM UOM= &
+        148            "meter"
+        149        LIMITS "2" "4"
+        150
+        151    EO-CONV-OPTI
+        152
+        153    CALCULATOR B1
+        154        DEFINE CONV LOCAL-PARAM PHYS-QTY=USR-DUMMY0 UOM="base-units"
+        155        DEFINE INLET MOLE-FLOW STREAM=FEED SUBSTREAM=MIXED  &
+        156            COMPONENT=ACETONE UOM="kmol/hr"
+        157        DEFINE OUTLET MOLE-FLOW STREAM=PFR-PRD SUBSTREAM=MIXED  &
+        158            COMPONENT=ACETONE UOM="kmol/hr"
+        159    F     CONV = ((INLET - OUTLET)/INLET)*100
+        160        READ-VARS INLET OUTLET
+        161        WRITE-VARS CONV
+        162
+        163    SENSITIVITY S-1
+        164        DEFINE PURITY MASS-FRAC STREAM=ABR-TOP SUBSTREAM=MIXED  &
+        165            COMPONENT=KETENE
+        166        TABULATE 1 "PURITY"
+        167        VARY BLOCK-VAR BLOCK=ABSORBER VARIABLE=MASS-B  &
+        168            SENTENCE=COL-SPECS UOM="kg/hr"
+        169        RANGE OPT-LIST=RANGE LOWER="6000" UPPER="6500" INCR="10"
+        170
+        171    STREAM-REPOR MOLEFLOW MASSFLOW
+        172
+        173    PROPERTY-REP PCES
+        174
+        175    REACTIONS R-1 POWERLAW
+        176        REAC-DATA 1 PHASE=V
+        177        RATE-CON 1 PRE-EXP=1.125 ACT-ENERGY=284521.7 <kJ/kmol>  &
+        178            T-REF=1000. <K>
+        179        STOIC 1 MIXED ACETONE -1. / KETENE 1. / METHANE 1.
+        180        POWLAW-EXP 1 MIXED ACETONE 1.
+        181
+        182    REACTIONS R-2 GENERAL
+        183        REAC-DATA 1 NAME=1 REAC-CLASS=EQUILIBRIUM PHASE=V
+        184        STOIC 1 MIXED KETENE -1. / A-ACID -1. / A-ANHYDR 1.
+        185
+        186    DISABLE
+        187        SENSITIVITY S-1
+        188        CALCULATOR B1
+        189        DESIGN-SPEC DS-1
+        190    ;
+        191    ;
+        192    ;
+        193    ;
+        194    ;
+ *** INPUT TRANSLATOR MESSAGES ***
+
+  *** THIS RUN USES THE PROPERTIES ENTERPRISE DATABASE ***
+      SQLLOCALDB.APESV120 : (DATAVERSION - 38.0.0.14)                         
+      SQLLOCALDB.APV120 : (DATAVERSION - 38.0.0.20)                           
+      SQLLOCALDB.FACTV120 : (DATAVERSION - 38.0.0.1)                          
+      SQLLOCALDB.NISTV120 : (DATAVERSION - 38.0.0.12)                         
+
+  *   WARNING IN PHYSICAL PROPERTY SYSTEM                      (PCERTE.2)       
+      PROP-NAME WILSON FOR COMPONENT PAIR ACETONE AND KETENE                    
+      CANNOT BE ESTIMATED USING THE UNIFAC METHOD AS SPECIFIED                  
+      BECAUSE OF MISSING INPUT PARAMETERS:                                      
+         STRUCTUR, GMUFR   , GMUFQ                                              
+
+      INFORMATION IN PHYSICAL PROPERTY SYSTEM                  (PCERTE.10)      
+      STRUCTURE FOR COMPONENT KETENE HAS NOT BEEN DEFINED.                      
+      PCES CANNOT USE GROUP-CONTRIBUTION METHODS TO ESTIMATE MISSING PROPERTIES.
+
+  *   WARNING IN PHYSICAL PROPERTY SYSTEM                      (PCERTE.2)       
+      PROP-NAME WILSON FOR COMPONENT PAIR KETENE AND METHANE                    
+      CANNOT BE ESTIMATED USING THE UNIFAC METHOD AS SPECIFIED                  
+      BECAUSE OF MISSING INPUT PARAMETERS:                                      
+         STRUCTUR, GMUFR   , GMUFQ                                              
+
+  *   WARNING IN PHYSICAL PROPERTY SYSTEM                      (PCERTE.2)       
+      PROP-NAME WILSON FOR COMPONENT PAIR KETENE AND A-ACID                     
+      CANNOT BE ESTIMATED USING THE UNIFAC METHOD AS SPECIFIED                  
+      BECAUSE OF MISSING INPUT PARAMETERS:                                      
+         STRUCTUR, GMUFR   , GMUFQ                                              
+
+  *   WARNING IN PHYSICAL PROPERTY SYSTEM                      (PCERTE.2)       
+      PROP-NAME WILSON FOR COMPONENT PAIR KETENE AND A-ANHYDR                   
+      CANNOT BE ESTIMATED USING THE UNIFAC METHOD AS SPECIFIED                  
+      BECAUSE OF MISSING INPUT PARAMETERS:                                      
+         STRUCTUR, GMUFR   , GMUFQ                                              
+
+
+ 
+ DESIGN SPEC: DS-1 WILL BE INTERPRETED 
+ CALCULATOR BLOCK: B1 WILL BE INTERPRETED 
+ SENSITIVITY BLOCK: S-1 WILL BE INTERPRETED 
+ 
+
+ PDF updated                                                                      TIME =      0.93
+
+ *** CALCULATION TRACE ***
+
+ PRODUCTION OF ACETIC ANHYDRIDE                                  
+
+ *** FLOWSHEET ANALYSIS MESSAGES ***
+
+ FLOWSHEET CONNECTIVITY BY STREAMS       
+
+   STREAM     SOURCE     DEST           STREAM     SOURCE     DEST
+   FEED       ----       PFR            ACETACID   ----       RCSTR   
+   PFR-PRD    PFR        COMP           FD2ABSRB   COMP       ABSORBER
+   CH4-VAP    ABSORBER   ----           ABR-TOP    ABSORBER   DSTL    
+   ABR-BTM    ABSORBER   ----           DSTL-TOP   DSTL       ----    
+   DSTL-BTM   DSTL       RCSTR          CSTR-PRD   RCSTR      ----    
+
+ FLOWSHEET CONNECTIVITY BY BLOCKS        
+
+   BLOCK        INLETS                         OUTLETS
+   PFR          FEED                           PFR-PRD                     
+   COMP         PFR-PRD                        FD2ABSRB                    
+   ABSORBER     FD2ABSRB                       CH4-VAP ABR-TOP ABR-BTM     
+   DSTL         ABR-TOP                        DSTL-TOP DSTL-BTM           
+   RCSTR        DSTL-BTM ACETACID              CSTR-PRD                    
+
+      COMPUTATION ORDER FOR THE FLOWSHEET IS:
+      PFR COMP ABSORBER DSTL RCSTR 
+
+Calculations begin                                                              time      0.15
+
+
+ SIMULATION CALCULATIONS BEGIN                                                    TIME =      0.15
+
+      ENTHALPY CALCULATION FOR INLET STREAM FEED OF BLOCK PFR                     TIME =      0.15
+      KODE = 2  NTRIAL =   1  T =1035.0000  P =  162120.      V =  1.00000      Q =  0.00000    
+
+      UOS BLOCK PFR      MODEL: RPLUG                                             TIME =      0.15
+        AT REACTOR EXIT :
+        LENGTH =   2.3756      DIAMETER =   1.0000      RESIDENCE TIME =  0.88526    
+        PROCESS STREAM T =    920.74     P =   0.16212E+06 H =  -0.45395E+07 V =    1.0000    
+        MIN T =   920.737     AT Z/LENGTH =   1.00000     MAX T =   1035.00     AT Z/LENGTH =   0.00000    
+
+      UOS BLOCK COMP     MODEL: COMPR                                             TIME =      0.20
+      OUTLET TEMP =   972.0       OUTLET PRES =  0.3000E+06   INDICATED HP =  0.3033E+06   BRAKE HP =  0.3033E+06
+      POLYTROPIC EFFICIENCY =  0.7200    
+      ASME FAC =   1.000    
+
+      UOS BLOCK ABSORBER MODEL: RADFRAC                                           TIME =      0.20
+
+       Convergence iterations:
+         OL   ML   IL     Err/Tol
+          1    1   10      862.62    
+          2    1   10      2040.0    
+          3    1   10      1389.9    
+          4    1   10      1393.9    
+          5    1   10      1473.3    
+          6    1   10      1094.8    
+          7    1   10      1041.2    
+          8    1    4      358.98    
+          9    1   10      1638.5    
+         10    1   10      1909.3    
+         11    1   10      1521.8    
+         12    1   10      2058.1    
+         13    1   10      4572.1    
+         14    1    9      3604.7    
+         15    1    4      1355.3    
+         16    1    2      480.49    
+         17    1    2      167.41    
+         18    1    2      19.759    
+         19    1    1     0.69742    
+
+      UOS BLOCK DSTL     MODEL: RADFRAC                                           TIME =      0.25
+
+       Convergence iterations:
+         OL   ML   IL     Err/Tol
+          1    1    7      40339.    
+          2    1    4      3132.6    
+          3    1    4      1062.9    
+          4    1    4      621.45    
+          5    1    4      265.12    
+          6    1    3      90.308    
+          7    1    4      34.770    
+          8    1    4      19.413    
+          9    1    4      6.4184    
+         10    1    4      3.0569    
+         11    1    4      1.3988    
+         12    1    4     0.85040    
+
+      ENTHALPY CALCULATION FOR INLET STREAM ACETACID OF BLOCK RCSTR               TIME =      0.26
+      KODE = 2  NTRIAL =   1  T = 298.1500  P =  100000.      V =  0.00000      Q =  0.00000    
+
+      UOS BLOCK RCSTR    MODEL: RCSTR                                             TIME =      0.26
+      KODE = 2   NO. TEMP ITER =    1     TEMP =  323.150    
+      KPHASE =    1 KODE =    2 T =  323.150     P =  10000.0     Q = -135204.    
+      REACTOR DUTY =  -135204.      VOLUME =   20.0000      RES TIME =   9.85516    
+      REACTOR T =   323.150      P =   10000.0      V =   1.00000    
+
+      CHECKING PHASE EQUILIBRIUM RESULTS                                          TIME =      0.28
+
+      CHECKING PHASE EQUILIBRIUM RESULTS                                          TIME =      0.28
+<reset scope>
+<reset scope>
+
+RUN SAVED
+
+
+
+ NO ERRORS OR WARNINGS GENERATED
